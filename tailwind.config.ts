@@ -16,5 +16,8 @@ const config: Config = {
     },
   },
   plugins: [],
+  fontFace: {
+    'kanit': ['Kanit', 'sans-serif'],
+  },
 }
 export default config

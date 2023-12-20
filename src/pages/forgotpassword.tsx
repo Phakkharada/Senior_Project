@@ -1,16 +1,14 @@
 import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-function SignInSide() {
+
+function Forgotpassword() {
   const handleSubmit = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const jsonData = {
       email: data.get('email'),
-      password: data.get('password'),
     };
 
-    fetch('http://localhost:3333/login', {
+    fetch('http://localhost:3333/forgotpassword', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -20,17 +18,10 @@ function SignInSide() {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === 'ok') {
-          if (data.role == 1) {
-            window.location.href = '/adminpage';
-            localStorage.setItem('token', data.token);
-          }
-          else {
-            localStorage.setItem('token', data.token);
-            window.location.href = '/login';
-          }
-          alert('login success');
+          window.location.href = '/';
+          alert('request success');
         } else {
-          alert('login failed');
+          alert('request failed');
         }
       })
       .catch((error) => {
@@ -54,10 +45,10 @@ function SignInSide() {
               <div className="bg-white mb-4 overflow-hidden">
                 <img src="/logo.png" alt="logo" className="w-full h-full" />
               </div>
-              <h1 className="text-blue-900 font-semibold text-4xl">เข้าสู่ระบบ</h1>
+              <h1 className="text-blue-900 font-semibold text-4xl">เปลี่ยนรหัสผ่าน</h1>
             </div>
             <div className='flex flex-col gap-4'>
-              <p className='px-1'>อีเมล</p>
+            <p className='px-1'>อีเมล</p>
               <input
                 type="email"
                 name="email"
@@ -66,33 +57,12 @@ function SignInSide() {
                 className='w-full border p-2 border-gray-300 bg-gray-200 rounded-xl text-gray-900 px-3 py-2 focus:ring-blue-800 focus:border-blue-800 appearance-none relative block focus:z-10 focus:outline-none'
                 required
               />
-              <p className='px-1'>รหัสผ่าน</p>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="รหัสผ่าน"
-                className='w-full border p-2 border-gray-300 bg-gray-200 rounded-xl text-gray-900 px-3 py-2 focus:ring-blue-800 focus:border-blue-800 appearance-none relative block focus:z-10 focus:outline-none'
-                required
-              />
-              <label className="flex items-center">
-                <input type="checkbox" className="mr-2" value="remember" />
-                จำไว้ในระบบ
-              </label>
               <button
                 type="submit"
                 className="w-full bg-blue-800 text-white px-4 py-2  rounded-full"
               >
-                เข้าสู่ระบบ
+                ยืนยัน
               </button>
-              <div className="flex justify-between mt-4">
-                <Link href="/forgotpassword" className="text-blue-900 hover:text-blue-600">
-                  Forgot password?
-                </Link>
-                <Link href="/register" className="text-blue-900 hover:text-blue-600">
-                  ยังไม่มีบัญชี? ลงทะเบียน
-                </Link>
-              </div>
             </div>
           </form>
         </div>
@@ -101,4 +71,4 @@ function SignInSide() {
   );
 }
 
-export default SignInSide;
+export default Forgotpassword;
